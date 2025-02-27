@@ -17,15 +17,15 @@ int check_char_in_str(char *str, char c) {
 
 char* trim(char *str){
     int trim_start = 0, trim_end = strlen(str) - 1;
-    static char new_str[100];
 
     while (str[trim_start] == ' ') trim_start++; // where do leading whitespaces stop
     
     while (str[trim_end] == ' ') trim_end--; // where do ending whitespaces stop
     
-    for (int i = 0; i <= (trim_end - trim_start); i++) new_str[i] = str[trim_start + i]; // set new_str to difference
+    for (int i = 0; i <= (trim_end - trim_start); i++) str[i] = str[trim_start + i]; // set new_str to difference
 
-    return new_str;
+    str[trim_end - trim_start + 1] = '\0'; // terminate new_str
+    return str;
 }
 
 int check_str_is_comment(char *str) {
