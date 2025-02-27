@@ -1,9 +1,0 @@
-
-2025-02-27 14:28:14
-Filename: a2-logical-counting_LOC.c
-LOC: 65
---------------------
-2025-02-27 14:28:39
-Filename: ../A1/a1-mean_standardDeviation.c
-LOC: 132
---------------------
