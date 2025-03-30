@@ -1,4 +1,4 @@
-// gcc a1-mean_standardDeviation.c -o a1-mean_standardDeviation && ./a1-mean_standardDeviation
+// gcc A1/a1-mean_standardDeviation.c -o A1/a1-mean_standardDeviation && ./A1/a1-mean_standardDeviation
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,7 @@ int main(){
     scanf("%c", &input);
 
     if (input == 'f'){
-        char filename[20] = "data.txt", row[40], line[300];
+        char filename[20] = "A1/data.txt", row[40], line[300];
         int N = 10; // number of nums
 
         FILE *file = fopen(filename, "r");
@@ -139,7 +139,7 @@ void close_list(node *head) {
 
 // postmortem
 void export_data(float mean, float std_def){
-    FILE *file = fopen("processed_data.txt", "a+");
+    FILE *file = fopen("A1/processed_data.txt", "a+");
     if (file == NULL){
         printf("file not found\n");
         return;

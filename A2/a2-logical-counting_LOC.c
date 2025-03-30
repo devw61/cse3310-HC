@@ -1,4 +1,4 @@
-// gcc a2-logical-counting_LOC.c -o a2-logical-counting_LOC && ./a2-logical-counting_LOC
+// gcc A2/a2-logical-counting_LOC.c -o A2/a2-logical-counting_LOC && ./A2/a2-logical-counting_LOC
 
 #include <stdio.h>
 #include <string.h>
@@ -35,7 +35,7 @@ int check_str_is_comment(char *str) {
 
 // postmortem
 void export_data(char *user_file, int count) {
-    FILE *file = fopen("processed_data.txt", "a+");
+    FILE *file = fopen("A2/processed_data.txt", "a+");
     if (file == NULL)
     {
         printf("file not found\n");
