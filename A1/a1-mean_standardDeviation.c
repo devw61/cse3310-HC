@@ -6,8 +6,7 @@
 #include <math.h>
 #include <time.h>
 
-typedef struct node
-{
+typedef struct node {
     struct node *next;
     float value;
 } node;

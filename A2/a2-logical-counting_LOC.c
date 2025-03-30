@@ -71,7 +71,7 @@ int main() {
     }
 
     // iterate through the file
-    while(fgets(line_str,100,fp) != NULL) { // 10 is a random number
+    while(fgets(line_str,100,fp) != NULL) { 
         strcpy(trimmed_line_str,trim(line_str));
         if (check_char_in_str(trimmed_line_str, '\n') && trimmed_line_str[0] != '\n' && !check_str_is_comment(trimmed_line_str)){
             count++;
