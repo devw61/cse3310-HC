@@ -11,7 +11,7 @@ typedef struct node {
     float value;
 } node;
 
-float mean(node *head, int N);
+float mean(node *head, int N); 
 float std_dev(node *head, float mean, int N);
 void close_list(node *head);
 void export_data(float mean, float std_dev);
