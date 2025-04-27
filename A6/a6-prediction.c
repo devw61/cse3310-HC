@@ -45,7 +45,6 @@ int main() {
     scanf("%s", filename);
     printf("Enter the value of X_k: ");
     scanf("%d", &X_k);
-    ;
 
     FILE *file = open_file(filename);
     fgets(line1, sizeof(line1), file);
