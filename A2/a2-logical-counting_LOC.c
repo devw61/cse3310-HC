@@ -78,7 +78,7 @@ int main() {
         }
     }
 
-    printf("%s has %d lines of code\n", filename, count);
+    printf("%s has %d logical lines of code\n", filename, count);
     export_data(filename, count);
     
     fclose(fp);

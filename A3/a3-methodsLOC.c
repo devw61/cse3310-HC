@@ -186,7 +186,7 @@ int get_program_loc(char *filename){
 
 //postmortem
 void export_data(char *user_file, char **final_str_arr, int count) {
-    FILE *file = fopen("./cse3310-HC/A3/postmortem.txt", "a+");
+    FILE *file = fopen("A3/postmortem.txt", "a+");
     if (file == NULL)
     {
         printf("file not found\n");

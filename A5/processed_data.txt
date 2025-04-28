@@ -1,0 +1,22 @@
+
+2025-04-27 20:59:35
+lower_limit: 0.000000 | upper_limit: 2.500000
+intervals: 20 | degrees of freedom: 9, tolerance: 0.000000
+Normal Distribution: 0.993790
+Chi-squared: 0.019117
+t-distribution: 0.983068
+--------------------
+2025-04-27 21:00:47
+lower_limit: 0.000000 | upper_limit: 0.200000
+intervals: 20 | degrees of freedom: 9, tolerance: 0.000000
+Normal Distribution: 0.579260
+Chi-squared: 0.000001
+t-distribution: 0.577037
+--------------------
+2025-04-27 21:03:50
+lower_limit: -1.100000 | upper_limit: 0.000000
+intervals: 20 | degrees of freedom: 9, tolerance: 0.000000
+Normal Distribution: 0.135666
+Chi-squared: nan
+t-distribution: 0.149942
+--------------------

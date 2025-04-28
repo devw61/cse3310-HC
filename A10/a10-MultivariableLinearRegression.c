@@ -25,7 +25,7 @@ typedef struct Averages {
 node *create_linked_list(char line1[], char line2[], char line3[], char line4[], node *head);
 FILE *open_file(char *filename);
 void close_list(node *head);
-void export_data(float beta_arr[], int expected_vals[], float Z_k, float std_dev, float range_sev, float t_dist_sev, float UPL_sev, float LPL_sev, float range_nine, float t_dist_nine, float UPL_nine, float LPL_nine);
+void export_data(float beta_arr[], float expected_vals[], float Z_k, float std_dev, float range_sev, float t_dist_sev, float UPL_sev, float LPL_sev, float range_nine, float t_dist_nine, float UPL_nine, float LPL_nine);
 
 Averages calc_avgs(node *head, int N);
 float Width(float X_high, float X_low, int N);
@@ -33,7 +33,7 @@ int get_coef(int i, int N);
 float gamma(float x);
 float calc_t_val(int N, float alpha, float E, int DoF);
 float t_dist_summ(int N, float X_low, float W, int DoF);
-float calc_range(node *head, int N, float avgs[], int expected_vals[], float std_dev, float t_val);
+float calc_range(node *head, int N, float avgs[], float expected_vals[], float std_dev, float t_val);
 float calc_std_dev(node *head, int N, float beta_arr[]);
 void init_matrix(betaConstant matrix[4][5], node *head, int N);
 float constant_summ(node *head, int row, int col);
@@ -47,18 +47,19 @@ void set_beta_val(betaConstant matrix[4][5], int beta_num, float beta_val);
 int main(){
     node *head = NULL;
     betaConstant matrix[4][5]; // Declare the matrix array
-    int N = 6, expected_vals[3], DoF = 4; // 6-4
+    int N = 6, DoF = 4; // 6-4
+    float expected_vals[3];
     float std_dev, t_dist_sev, t_dist_nine, Z_k, W, UPL_sev, LPL_sev, UPL_nine, LPL_nine;
     char filename[100], line1[100], line2[100], line3[100], line4[100];
 
     printf("Enter Filepath + name: ");
     scanf("%s", filename);
     printf("Enter the value of New LOC: ");
-    scanf("%d", &expected_vals[0]);
+    scanf("%f", &expected_vals[0]);
     printf("Enter the value of Reused LOC: ");
-    scanf("%d", &expected_vals[1]);
+    scanf("%f", &expected_vals[1]);
     printf("Enter the value of Modified LOC: ");
-    scanf("%d", &expected_vals[2]);
+    scanf("%f", &expected_vals[2]);
 
     FILE *file = open_file(filename);
     fgets(line1, sizeof(line1), file); // W
@@ -77,8 +78,8 @@ int main(){
 
     std_dev = calc_std_dev(head, N, beta_arr);
 
-    t_dist_sev = calc_t_val(N, .15, .85, N-4); 
-    t_dist_nine = calc_t_val(N, .1, .95, N-4); 
+    t_dist_sev = calc_t_val(N, .85, .15, N-4); 
+    t_dist_nine = calc_t_val(N, .95, .05, N-4); 
 
     float range_sev = calc_range(head, N, avgs.avgs, expected_vals, std_dev, t_dist_sev);
     float range_nine = calc_range(head, N, avgs.avgs, expected_vals, std_dev, t_dist_nine);
@@ -89,7 +90,12 @@ int main(){
     LPL_nine = Z_k - range_nine;
 
     printf("\nStandard Deviation: %.3f\n\n", std_dev);
-    printf("range(.85): %.0f\n", range_sev);
+    printf("Estimated Hours: %.0f\n", Z_k);
+    printf("Beta Coefficients:\n");
+    for (int i = 0; i < 4; i++){
+        printf("B_%d: %.3f  ", i, beta_arr[i]);
+    }
+    printf("\n\nrange(.85): %.0f\n", range_sev);
     printf("t-dist(.85): %.3f\n", t_dist_sev);
     printf("UPL: %.0f\n", UPL_sev);
     printf("LPL: %.0f\n\n", LPL_sev);
@@ -105,7 +111,7 @@ int main(){
     return 0;
 }
 
-float calc_range(node *head, int N, float avgs[], int expected_vals[], float std_dev, float t_val){
+float calc_range(node *head, int N, float avgs[], float expected_vals[], float std_dev, float t_val){
     node *current;
     float range = 0, range_tmp = 0, summations[3], numerators[3], total_summ = 0; 
 
@@ -132,7 +138,7 @@ float calc_t_val(int N, float alpha, float E, int DoF) {
     float Result = 0, OldResult = 0, iterations = 0, max_iterations = 10;
     float X_low = 0, X_high = 0, W = 0, trial_t = 0;
 
-    while (Result < E){
+    while (Result < alpha){
         X_high += .001;
         W = Width(X_high, X_low, N);
         while (iterations < max_iterations){
@@ -271,27 +277,27 @@ void init_matrix(betaConstant matrix[4][5], node *head, int N) {
     }
 }
 
-float constant_summ(node *head, int row, int col){
+float constant_summ(node *head, int row, int col) {
     node *current = head;
     float summation = 0;
 
-    if (row == 0){
-        while (current != NULL){
-            summation += current->vals[col-1];
+    if (row == 0) {
+        while (current != NULL) {
+            summation += current->vals[col - 1];
             current = current->next;
         }
-    } else if (col == 0){
-        while (current != NULL){
-            summation += current->vals[row-1];
+    } else if (col == 0) {
+        while (current != NULL) {
+            summation += current->vals[row - 1];
             current = current->next;
         }
-    } 
-    else {
-        while (current != NULL){
-            summation += current->vals[row-1] * current->vals[col-1];
+    } else {
+        while (current != NULL) {
+            summation += current->vals[row - 1] * current->vals[col - 1];
             current = current->next;
         }
     }
+
     return summation;
 }
 
@@ -388,7 +394,7 @@ node *create_linked_list(char line1[], char line2[], char line3[], char line4[],
     temp = head;
     char *Z_num = strtok(line4, ",");
     while (Z_num != NULL){
-        temp->vals[3] = atoi(Z_num);
+        temp->vals[3] = atof(Z_num);
         temp = temp->next;
         Z_num = strtok(NULL, ",");
     }
@@ -405,7 +411,7 @@ void close_list(node *head) {
     }
 }
 
-void export_data(float beta_arr[], int expected_vals[], float Z_k, float std_dev, float range_sev, float t_dist_sev, float UPL_sev, float LPL_sev, float range_nine, float t_dist_nine, float UPL_nine, float LPL_nine) {
+void export_data(float beta_arr[], float expected_vals[], float Z_k, float std_dev, float range_sev, float t_dist_sev, float UPL_sev, float LPL_sev, float range_nine, float t_dist_nine, float UPL_nine, float LPL_nine) {
     FILE *file = fopen("A10/processed_data.txt", "a+");
     if (file == NULL){
         printf("file not found. Could not save results.\n");
@@ -428,12 +434,13 @@ void export_data(float beta_arr[], int expected_vals[], float Z_k, float std_dev
     }
     fprintf(file, "\n\nExpected Values:\n");
     for (int i = 0; i < 3; i++){
-        fprintf(file, "%d  ", expected_vals[i]);
+        fprintf(file, "%.1f  ", expected_vals[i]);
     }
     fprintf(file, "\n\nStandard Deviation: %.3f\n\n", std_dev);
-    fprintf(file, "range(.70): %.0f | t_value: %.4f\n", range_sev, t_dist_sev);
+    fprintf(file, "Estimated Hours: %.0f\n", Z_k);
+    fprintf(file, "\nrange(.70): %.0f | t_value: %.4f\n", range_sev, t_dist_sev);
     fprintf(file, "UPL: %.0f | LPL: %.0f\n\n", UPL_sev, LPL_sev);
-    fprintf(file, "range(.95): %.0f | t_value: %.4f\n", range_nine, t_dist_nine);
+    fprintf(file, "range(.90): %.0f | t_value: %.4f\n", range_nine, t_dist_nine);
     fprintf(file, "UPL: %.0f | LPL: %.0f\n", UPL_nine, LPL_nine);
     fprintf(file, "--------------------");
     fclose(file);

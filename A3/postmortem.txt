@@ -1,0 +1,19 @@
+
+2025-04-27 21:12:46
+Filename: A1/a1-mean_standardDeviation.c
+LOC: 130
+Function  1:                           main | LOC:   86
+Function  2:                           mean | LOC:   10
+Function  3:                        std_dev | LOC:   10
+Function  4:                     close_list | LOC:    7
+Function  5:                    export_data | LOC:   20
+--------------------
+2025-04-27 21:12:53
+Filename: A2/a2-logical-counting_LOC.c
+LOC: 64
+Function  1:              check_char_in_str | LOC:    8
+Function  2:                           trim | LOC:   11
+Function  3:           check_str_is_comment | LOC:    3
+Function  4:                    export_data | LOC:   21
+Function  5:                           main | LOC:   26
+--------------------

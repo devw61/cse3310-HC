@@ -1,0 +1,35 @@
+
+2025-04-27 20:50:25
+Beta Coefficients:
+B_0: 0.193  B_1: 0.065  B_2: 0.015  B_3: 0.140  
+
+Expected Values:
+185.0  150.0  45.0  
+
+Standard Deviation: 3.396
+
+Estimated Hours: 21
+
+range(.70): 6 | t_value: 1.3870
+UPL: 27 | LPL: 15
+
+range(.90): 12 | t_value: 2.9210
+UPL: 32 | LPL: 9
+--------------------
+2025-04-27 20:50:47
+Beta Coefficients:
+B_0: 6.701  B_1: 0.078  B_2: 0.015  B_3: 0.246  
+
+Expected Values:
+650.0  3000.0  155.0  
+
+Standard Deviation: 22.651
+
+Estimated Hours: 141
+
+range(.70): 39 | t_value: 1.3870
+UPL: 180 | LPL: 102
+
+range(.90): 77 | t_value: 2.9210
+UPL: 218 | LPL: 64
+--------------------

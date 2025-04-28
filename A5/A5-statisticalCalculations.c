@@ -23,19 +23,14 @@ void export_data(float lower_limit, float upper_limit, int intervales, int DoF, 
 
 int main(){
     char input_X_high[20], input_X_low[20];
-    float X_high, X_low, E, OldResult = 0, Result, W;
-    int N, DoF;
+    float X_high, X_low, E = 0, OldResult = 0, Result, W;
+    int N = 20, DoF = 9;
 
     printf("Enter the lower limit (∞ = inf): ");
     scanf("%s", input_X_low);
     printf("Enter the upper limit: ");
     scanf("%s", input_X_high);
-    printf("Enter the number of intervals: ");
-    scanf("%d", &N);
-    printf("Enter the degrees of freedom: ");
-    scanf("%d", &DoF);
-    printf("Enter the error tolerance: ");
-    scanf("%f", &E);
+   
 
     while(!(is_numeric(input_X_high)) && !(is_numeric(input_X_low) || strcmp(input_X_low, "inf") == 0)){
         printf("Invalid input. Please enter numeric values for limits.\n");
@@ -46,8 +41,8 @@ int main(){
     }
     
     if (strcmp(input_X_low, "inf") == 0 ){
-        X_high = fabs(atof(input_X_high));
-        X_low = 0;
+        X_high = 0;
+        X_low = atof(input_X_high);
     } else {
         X_high = atof(input_X_high);
         X_low = atof(input_X_low);
@@ -162,9 +157,7 @@ float calc_normal_dist(int N, float X_low, float X_high, float W, float E, char 
         iterations++;
     }
 
-    if (strcmp(X_low_str, "inf") == 0){
-        Result = (X_high > 0) ? .5 + Result : fabs(.5 - fabs(Result));
-    }
+    Result = (X_high > 0) ? .5 + Result : fabs(.5 - fabs(Result));
 
     return Result;
 }
