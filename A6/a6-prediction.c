@@ -62,7 +62,6 @@ int main() {
     X_avg = avgs.X_avg;
 
     std_dev = calc_std_dev(head, N, B0, B1);
-    W = Width(X_k, X_avg, N);
     t_dist_sev = calc_t_val(N, .15, .85, N-2); // ɑ = 30%
     t_dist_nine = calc_t_val(N, .05, .95, N-2); // ɑ = 10%
 
