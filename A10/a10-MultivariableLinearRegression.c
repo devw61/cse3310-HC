@@ -15,7 +15,7 @@ typedef struct betaConstant {
 
 typedef struct node {
     struct node *next;
-    int vals[4]; // W, X, Y, Z
+    float vals[4]; // W, X, Y, Z
 } node;
 
 typedef struct Averages {
